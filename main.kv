@@ -15,6 +15,7 @@
 
     AnchorLayout:
         anchor_x: "left"
+        pos_hint:{"center_y":.1,"center_x":.5}
         size_hint_y: None
         height: avatar.height
 
@@ -23,24 +24,30 @@
             size_hint: None, None
             size: "56dp", "56dp"
             source: "data/logo/kivy-icon-256.png"
-
     MDLabel:
         text: "You Tube Video Downloader "
         font_style: "Button"
         adaptive_height: True
+    
+    MDList:
+        id: container
+        
+        OneLineListItem:
+            text:"Dark Theam"
+            on_release:root.switchActive()
+            MDSwitch:
+                id:darkSwitch
+                pos_hint:{"center_x":.9,"center_y":.5}
+                active:root.switchCheaking
+                on_active:app.switch_click(self,self.active)
+
 
 
 
     ScrollView:
-
-        DrawerList:
-            id: md_list
-
-
-
 MDScreen:
 
-    MDNavigationLayout:
+    MDNavigationLayout: 
 
         ScreenManager:
 
