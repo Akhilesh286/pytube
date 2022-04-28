@@ -1,3 +1,6 @@
+WindowManager:
+	FirstWindow:
+	SecondWindow:
 <ItemDrawer>:
     theme_text_color: "Custom"
     on_release: self.parent.set_color_item(self)
@@ -41,35 +44,66 @@
                 active:root.switchCheaking
                 on_active:app.switch_click(self,self.active)
 
+        ScrollView:
 
+<FirstWindow>:
+	name: "first"
+    
+    MDScreen:
 
+        MDNavigationLayout: 
 
-    ScrollView:
-MDScreen:
+            ScreenManager:
 
-    MDNavigationLayout: 
-
-        ScreenManager:
-
-            MDScreen:
-                MDLabel:
-                    text:"hello:"
-
-                MDBoxLayout:
-                    orientation: 'vertical'
+                MDScreen:
                     
+                    MDTextField:
+                        hint_text: "url"
+                        size_hint:None,None
+                        width:250
+                        pos_hint:{"center_x":.5,"center_y":.5}               
+                    MDFillRoundFlatButton:
+                        text:"submit"
+                        pos_hint:{"center_x":.5,"center_y":.4}
+                        on_release: 
+                            app.root.current = "second"
+                            root.manager.transition.direction = "left"
 
-                    MDToolbar:
-                        title: "YouTube Video Downloader"
-                        elevation: 10
-                        md_bg_color: .2,.2,.2,1
-                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
-
-                    Widget:
 
 
-        MDNavigationDrawer:
-            id: nav_drawer
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        
 
-            ContentNavigationDrawer:
-                id: content_drawer
+                        MDToolbar:
+                            title: "YouTube Video Downloader"
+                            elevation: 10
+                            md_bg_color: .2,.2,.2,1
+                            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+                        Widget:
+
+
+            MDNavigationDrawer:
+                id: nav_drawer
+
+                ContentNavigationDrawer:
+                    id: content_drawer
+
+
+<SecondWindow>:
+	name: "second"
+
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+
+		
+            
+
+		Button:
+			text: "Go Back"
+			font_size: 32
+			on_release: 
+				app.root.current = "first"
+				root.manager.transition.direction = "right"

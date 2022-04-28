@@ -5,8 +5,24 @@ from kivymd.app import MDApp
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import OneLineIconListItem, MDList
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 from sqldb import dataBase
+
+
+# multiple screen
+
+#Define our different screens
+class FirstWindow(Screen):
+	pass
+
+class SecondWindow(Screen):
+	pass
+
+class WindowManager(ScreenManager):
+	pass
+
+
 # Database created 
 db = dataBase("bd.sqlite")
 
@@ -62,7 +78,11 @@ class pytubeApp(MDApp):
             self.theme_cls.theme_style = "Dark"
         else:
             self.theme_cls.theme_style = "Light"
+
+
+        # run kv file
         return Builder.load_file("main.kv")
+
 
     def on_start(self):
         pass
@@ -78,6 +98,7 @@ class pytubeApp(MDApp):
         #     self.root.ids.content_drawer.ids.md_list.add_widget(
         #         ItemDrawer(icon=icon_name, text=icons_item[icon_name])
         #     )
+
     def press (self):
         pass
 
