@@ -11,6 +11,10 @@ WindowManager:
         text_color: root.text_color
 
 
+
+
+
+
 <ContentNavigationDrawer>:
     orientation: "vertical"
     padding: "8dp"
@@ -54,19 +58,29 @@ WindowManager:
         MDNavigationLayout: 
 
             ScreenManager:
+            
 
                 MDScreen:
                     
+                    MDLabel:
+                        id:errorText
+                        pos_hint:{"center_y":.7,"center_x":.5}
+                        halign:"center"
                     MDTextField:
+                        id :urlInput
                         hint_text: "url"
                         size_hint:None,None
-                        width:250
-                        pos_hint:{"center_x":.5,"center_y":.5}               
+                        width:300
+                        pos_hint:{"center_x":.5,"center_y":.5} 
+                                  
                     MDFillRoundFlatButton:
+                        id :submit
                         text:"submit"
                         pos_hint:{"center_x":.5,"center_y":.4}
-                        on_release: 
-                            app.root.current = "second"
+                        on_release:
+                            root.submit()
+                            #if root.checkingUrl == True:\
+                            app.current = "second"
                             root.manager.transition.direction = "left"
 
 
@@ -93,17 +107,40 @@ WindowManager:
 
 <SecondWindow>:
 	name: "second"
-
-	BoxLayout:
-		orientation: "vertical"
-		size: root.width, root.height
-
-		
-            
-
-		Button:
-			text: "Go Back"
-			font_size: 32
-			on_release: 
-				app.root.current = "first"
-				root.manager.transition.direction = "right"
+    MDScreen:
+        MDNavigationLayout: 
+            ScreenManager:
+                MDScreen:
+                    SmartTileWithLabel:
+                        id :thumbnail_url
+                        source:root.thumbnail_url
+                        size_hint:None,None
+                        width: "300dp"
+                        height: "200dp"
+                        opacity:1.5
+                        #{“x”:1, “y”:1, “left”:1, “right”:1, "center_x":1,"center_y":1, "top”:1, “bottom”:1("top":0)}
+                        pos_hint:{"center_y":.65,"center_x":.5}
+                        
+                        text: f"[i][size=20][color=#999999]{root.title}[/color][/size]\n[size=14][color=#999999]{root.time}[/color][/size]"
+                        
+                        
+                    
+                    
+                   
+                    MDList:
+                        pos_hint:{"center_x":0.5,"center_y":.35}
+                        size_hint:None,None
+                        width:"300dp"
+                        OneLineAvatarIconListItem:
+                            text:"for audio "
+                            on_release:root.switchActive()
+                            IconLeftWidget:
+                                icon:"music"
+                            MDSwitch:
+                                id: audioSwitch
+                                pos_hint:{"center_x":.9,"center_y":.5}
+                    MDFillRoundFlatIconButton:
+                        text:"Download"
+                        icon:"download" 
+                        pos_hint:{"center_x":0.5,"center_y":.25}     
+                    

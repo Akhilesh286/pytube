@@ -1,0 +1,18 @@
+MDBoxLayout:
+                        orientation: 'vertical'
+                        
+
+                        MDToolbar:
+                            title: "YouTube Video Downloader"
+                            elevation: 10
+                            md_bg_color: .2,.2,.2,1
+                            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+                        Widget:
+
+
+            MDNavigationDrawer:
+                id: nav_drawer
+
+                ContentNavigationDrawer:
+                    id: content_drawer

@@ -9,18 +9,56 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 from sqldb import dataBase
 
+from pytube import YouTube
+
+
+
+
+
+
 
 # multiple screen
-
 #Define our different screens
 class FirstWindow(Screen):
-	pass
+    checkingUrl = False 
+    def submit(self):
+        # self.url = self.ids.urlInput.text
+        try:
+            yt = YouTube(str(self.ids.urlInput.text))
+            self.checkingUrl = True
+            #SecondWindow()
+            print ('haud')
+        except:
+            self.ids.urlInput.hint_text = "ReEnter The Url"
+            self.ids.errorText.text = "Enter Url Only"
+            self.ids.errorText.color = "red"
 
 class SecondWindow(Screen):
-	pass
+    thumbnail_url = ""
+    title = ""
+    time = ""
+    def __init__(self, **kw):
+        super().__init__(**kw) 
+
+        # try:
+        #     # self.thumbnail_url = 
+        #     # self.title = 
+        #     # self.time = 
+        # except:
+        #     print ("hai")
+        
+    def switchActive (self):
+        onOFF = self.ids.audioSwitch.active
+        if onOFF == False:
+            self.ids.audioSwitch.active = True
+        else:
+            self.ids.audioSwitch.active = False
+    def audioSwitch (self,switchObject,switchValue):
+        pass
+    
 
 class WindowManager(ScreenManager):
-	pass
+    pass
 
 
 # Database created 
@@ -51,6 +89,7 @@ class ContentNavigationDrawer(MDBoxLayout):
         else:
             self.ids.darkSwitch.active = False
         # print(switchObject)
+   
     
 
 class ItemDrawer(OneLineIconListItem):
@@ -71,6 +110,7 @@ class DrawerList(ThemableBehavior, MDList):
 
 
 class pytubeApp(MDApp):
+    
     def build(self):
         print (select_all)
         print (type(select_all[0][0]))
@@ -86,19 +126,6 @@ class pytubeApp(MDApp):
 
     def on_start(self):
         pass
-        # icons_item = {
-        #     "folder": "My files",
-        #     "account-multiple": "Shared with me",
-        #     "star": "Starred",
-        #     "history": "Recent",
-        #     "checkbox-marked": "Shared with me",
-        #     "upload": "Upload",
-        # }
-        # for icon_name in icons_item.keys():
-        #     self.root.ids.content_drawer.ids.md_list.add_widget(
-        #         ItemDrawer(icon=icon_name, text=icons_item[icon_name])
-        #     )
-
     def press (self):
         pass
 
